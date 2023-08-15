@@ -1,4 +1,5 @@
 # This is the main terraform file
+# where RDS, ECR, EKS, ALB are created
 # Usage: []=optional
 # terraform fmt
 # terraform validate
