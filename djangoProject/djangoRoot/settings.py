@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'djangoRoot.listingIPApp.listingIPConfig'
+    'listingIPApp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
