@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local development files
+db.sqlite3
+media/
+
+# Log files
+logs/
+*.log
+
+# Other files
+.DS_Store
+node_modules/
+.gitignore

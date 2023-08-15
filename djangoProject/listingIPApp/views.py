@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import IPAdresses
 
-# This view is for adding client IP to RDS database (or sqlite in case of testing) and display a message.
+# This view is for adding client IP to RDS database (or sqlite3 in case of testing) and display a message.
 def home(request):
     client_ip_address = request.META.get('REMOTE_ADDR')
     if client_ip_address:
@@ -12,3 +12,6 @@ def home(request):
     else:
         return HttpResponse("<h1>Your ip address could not be added to the database! maybe because your ip is private or there is a proxy.</h1>")
     
+def show_ips(request):
+    ips = IPAddresses.objects.all()
+    return render(request, 'show_ips.html', {'ips': ips})
