@@ -58,7 +58,7 @@ resource "aws_ecr_repository" "ecr" {
 # IAM Role for EKS
 
 resource "aws_iam_role" "eks" {
-  name               = "eks-cluster"
+  name               = var.eks_iam_role_name
   assume_role_policy = data.aws_iam_policy_document.eks_assume_role.json
 
   tags = {
@@ -69,14 +69,14 @@ resource "aws_iam_role" "eks" {
 # IAM Policy attachment for EKS
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+  policy_arn = var.iam_role_policy_arn
   role       = aws_iam_role.eks.name
 }
 
 # EKS cluster
 
 resource "aws_eks_cluster" "eks" {
-  name     = "helm-cluster"
+  name     = var.eks_cluster_name
   role_arn = aws_iam_role.eks.arn
 
   vpc_config {
@@ -89,6 +89,17 @@ resource "aws_eks_cluster" "eks" {
 
   tags = {
     Terraform = "True"
+    Helm      = "True"
   }
 }
 
+# ALB for EKS
+
+resource "aws_lb" "alb" {
+  name               = var.alb_name
+  load_balancer_type = var.load_balancer_type
+
+  tags = {
+    Terraform = "True"
+  }
+}

@@ -50,6 +50,38 @@ variable "ecr_name" {
   type        = string
 }
 variable "scan_on_push" {
-  description = "The scan on push configuration for the images in the ecr repository"
+  description = "Scan on push for images in the ECR repo"
   type        = bool
+}
+
+# IAM Role for EKS variables
+
+variable "eks_iam_role_name" {
+  description = "iam role for eks"
+  type        = string
+}
+
+# IAM Role policy attachment
+
+variable "iam_role_policy_arn" {
+  description = "iam policy attachment arn"
+  type        = string
+}
+
+# EKS variables
+
+variable "eks_cluster_name" {
+  description = "EKS cluster name"
+  type        = string
+}
+
+# ALB variables
+
+variable "alb_name" {
+  description = "ALB name"
+  type        = string
+}
+variable "load_balancer_type" {
+  description = "load balancer type either application or network"
+  type        = string
 }
