@@ -11,8 +11,11 @@ media/
 # Log files
 logs/
 *.log
+nohup*
 
 # Other files
 .DS_Store
 node_modules/
 .gitignore
+Dockerfile
+.dockerignore
