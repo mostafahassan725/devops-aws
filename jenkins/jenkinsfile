@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Pull from Github repository') {
             steps {
@@ -9,17 +8,13 @@ pipeline {
         }
         stage('Build Django image') {
             steps {
-                script {
-                    sh 'docker build ../djangoApp/ -t djangoApp'
-                }
+                sh 'docker build ../djangoApp/ -t djangoApp'
             }
         }
         stage('Push Django image to Docker hub') {
             steps {
-                script {
                     withCredentials([string(credentialsId: 'dockerhub-password', variable: 'dockerhubPassword')]) {
     sh 'docker login -u mostafahassan724 -p ${dockerhubPassword}'
-}
                     sh 'docker push mostafahassan724/myrepo'
                 }
             }
