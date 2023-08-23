@@ -11,17 +11,26 @@ pipeline {
         }
         stage('Build Django image') {
             steps {
-                sh 'docker build ../djangoApp/ -t djangoapp'
+                sh 'docker build -t mostafahassan724/djangoapp djangoApp/'
             }
         }
         stage('Push Django image to Docker hub') {
             steps {
-                    withCredentials([string(credentialsId: 'dockerhub-password', variable: 'dockerhubPassword')]) {
-    sh 'docker login -u mostafahassan724 -p ${dockerhubPassword}'
-                    sh 'docker push mostafahassan724/myrepo'
+                script {
+                    withCredentials([string(credentialsId: 'dockerhub-password', variable: 'dockerhubpassword')]) {               
+                        sh 'docker login -u mostafahassan724 -p ${dockerhubpassword}'
+            }
+                        sh 'docker push mostafahassan724/djangoapp'
+                    }
                 }
+        }
+        stage('Remove local images after successful push') {
+            steps {
+                sh 'docker rmi mostafahassan724/djangoapp'
             }
         }
+
     }
-}
+  }
+
 
