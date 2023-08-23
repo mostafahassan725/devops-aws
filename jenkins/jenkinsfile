@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    tool name: 'Docker', type: 'dockerTool'
+	tools {
+  	dockerTool 'Docker'
+	}
     stages {
         stage('Pull from Github repository') {
             steps {
@@ -9,7 +11,7 @@ pipeline {
         }
         stage('Build Django image') {
             steps {
-                sh 'docker build ../djangoApp/ -t djangoApp'
+                sh 'docker build ../djangoApp/ -t djangoapp'
             }
         }
         stage('Push Django image to Docker hub') {
