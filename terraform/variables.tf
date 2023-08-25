@@ -38,20 +38,12 @@ variable "parameter_group_name" {
   description = "The associated parameter group for the database (default configuration settings for this group)"
   type        = string
 }
-variable "skip_final_snapshot" {
-  description = "Skip final snapshot when the database is deleted"
-  type        = bool
-}
 
 # ECR repository variables
 
 variable "ecr_name" {
   description = "ECR repository name"
   type        = string
-}
-variable "scan_on_push" {
-  description = "Scan on push for images in the ECR repo"
-  type        = bool
 }
 
 # IAM Role for EKS variables
