@@ -81,18 +81,18 @@ variable "load_balancer_type" {
 # Helm release variables
 
 variable "helm_release_name" {
-  deacription = "Helm release name for the Django app"
-  type = string
+  description = "Helm release name for the Django app"
+  type        = string
 }
 variable "chart_path" {
-  deacription = "The local chart path relative to the helm_release.tf file"
-  type = string
+  description = "The local chart path relative to the helm_release.tf file"
+  type        = string
 }
 variable "release_namespace" {
-  deacription = "Helm release namespace"
-  type = string
+  description = "Helm release namespace"
+  type        = string
 }
 variable "max_history" {
-  deacription = "Max number of old releases kept"
-  type = number
+  description = "Max number of old releases kept"
+  type        = number
 }
