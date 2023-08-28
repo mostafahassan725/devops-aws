@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build Django image') {
             steps {
-                sh 'docker build -t mostafahassan724/djangoapp djangoApp/'
+                sh 'docker build -t djangoapp djangoApp/'
             }
         }
         stage('Push Django image to Docker hub') {
@@ -20,13 +20,24 @@ pipeline {
                     withCredentials([string(credentialsId: 'dockerhub-password', variable: 'dockerhubpassword')]) {               
                         sh 'docker login -u mostafahassan724 -p ${dockerhubpassword}'
             }
+			sh 'docker image tag djangoapp mostafahassan724/djangoapp'
                         sh 'docker push mostafahassan724/djangoapp'
+                    }
+                }
+        }
+
+        stage('Push Django image to ECR') {
+            steps {
+                script {
+                        sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 908694979971.dkr.ecr.us-east-1.amazonaws.com'
+			sh 'docker image tag djangoapp 908694979971.dkr.ecr.us-east-1.amazonaws.com/myrepo'
+                        sh 'docker push 908694979971.dkr.ecr.us-east-1.amazonaws.com/myrepo'
                     }
                 }
         }
         stage('Remove local images after successful push') {
             steps {
-                sh 'docker rmi mostafahassan724/djangoapp'
+                sh 'docker rmi djangoapp'
             }
         }
 
