@@ -9,12 +9,6 @@ resource "aws_lb" "alb" {
   }
 }
 
-# Output ALB ID
-
-output "alb_id" {
-  value = aws_lb.alb.id
-}
-
 # Output ALB DNS
 
 output "alb_dns" {

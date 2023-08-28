@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vb308hoq!u-1$p6t%y+3h9ka$$*7_h0*@u7ykm*sy(&7xzw)xp'
+SECRET_KEY = os.environ.get['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -74,20 +74,21 @@ WSGI_APPLICATION = 'djangoRoot.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# sqlite3 database for local testing
 
 DATABASES = {
-#       'default': {
-#           'ENGINE': 'django.db.backends.mysql',
-#           'NAME': 'mysql_db',
-#           'USER': os.environ.get['MYSQL_DB_USERNAME'],
-#            'PASSWORD': os.environ.get['MYSQL_DB_PASSWORD'],
-#            'HOST': os.environ.get['MYSQL_DB_ENDPOINT'],
-#            'PORT': 3306,
-#        },
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+      'default': {
+          'ENGINE': 'django.db.backends.mysql',
+          'NAME': 'mysql_db',
+          'USER': os.environ.get['MYSQL_DB_USERNAME'],
+           'PASSWORD': os.environ.get['MYSQL_DB_PASSWORD'],
+           'HOST': os.environ.get['MYSQL_DB_ENDPOINT'],
+           'PORT': 3306,
+       },
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.sqlite3',
+        #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # }
     }
 
 # Password validation

@@ -71,17 +71,17 @@ data "aws_iam_policy_document" "eks_assume_role" {
   }
 }
 
-# Retrieve cluster endpoint
+# Retrieve eks cluster after provisioning 
+# to use it certificate_authority and endpoint in kubernetes provider
 
-data "aws_eks_cluster" "cluster_endpoint" {
-  name       = aws_eks_cluster.eks.endpoint
+data "aws_eks_cluster" "eks_cluster" {
+  name       = aws_eks_cluster.eks.name
   depends_on = [aws_eks_cluster.eks]
 }
 
-# Retrieve encoded cluster CA certification
+# Output the cluster endpoint
 
-data "aws_eks_cluster" "cluster_ca_cert" {
-  name       = aws_eks_cluster.eks.certificate_authority[0].data
-  depends_on = [aws_eks_cluster.eks]
+output "eks_cluster_endpoint" {
+  value = aws_eks_cluster.eks.endpoint
 }
 
