@@ -29,9 +29,12 @@ pipeline {
         stage('Push Django image to ECR') {
             steps {
                 script {
-                        sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 908694979971.dkr.ecr.us-east-1.amazonaws.com'
-			sh 'docker image tag djangoapp 908694979971.dkr.ecr.us-east-1.amazonaws.com/myrepo'
-                        sh 'docker push 908694979971.dkr.ecr.us-east-1.amazonaws.com/myrepo'
+withCredentials([string(credentialsId: 'ecr-endpoint', variable: 'ecrendpoint')]) {
+    
+
+                        sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ecrendpoint}'
+			sh 'docker image tag djangoapp ${ecrendpoint}'
+                        sh 'docker push ${ecrendpoint}'
                     }
                 }
         }

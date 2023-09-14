@@ -10,6 +10,7 @@ resource "aws_db_instance" "db" {
   password             = var.password
   parameter_group_name = var.parameter_group_name
   skip_final_snapshot  = true
+  publicly_accessible  = true
 
   tags = {
     Terraform = "True"
