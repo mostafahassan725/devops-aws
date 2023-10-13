@@ -1,5 +1,5 @@
 terraform {
-  source = "github.com/mostafahassan725/terraform-modules//vpc?ref=vpc-v0.0.3"
+  source = "github.com/mostafahassan725/terraform-modules//vpc?ref=vpc-v0.0.6"
 }
 
 include "root" {

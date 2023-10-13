@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: djangoApp
+    networks: 
+      - django
+    ports:
+      - 8000:8000
+    volumes:
+      - django:/app
+networks:
+  django:
+    name: django-net
+volumes:
+  django:
+    name: django-data

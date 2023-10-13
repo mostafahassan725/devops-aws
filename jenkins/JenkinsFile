@@ -1,8 +1,6 @@
 pipeline {
     agent any
-	tools {
-  	dockerTool 'Docker'
-	}
+	tools { dockerTool 'Docker' }
     stages {
         stage('Pull from Github repository') {
             steps {
@@ -19,9 +17,9 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'dockerhub-password', variable: 'dockerhubpassword')]) {               
                         sh 'docker login -u mostafahassan724 -p ${dockerhubpassword}'
-            }
-			sh 'docker image tag djangoapp mostafahassan724/djangoapp'
-                        sh 'docker push mostafahassan724/djangoapp'
+                    }
+			        sh 'docker image tag djangoapp mostafahassan724/djangoapp'
+                    sh 'docker push mostafahassan724/djangoapp'
                     }
                 }
         }
@@ -29,22 +27,20 @@ pipeline {
         stage('Push Django image to ECR') {
             steps {
                 script {
-withCredentials([string(credentialsId: 'ecr-endpoint', variable: 'ecrendpoint')]) {
-    
-
+                    withCredentials([string(credentialsId: 'ecr-endpoint', variable: 'ecrendpoint')]) {
                         sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ecrendpoint}'
-			sh 'docker image tag djangoapp ${ecrendpoint}'
+			            sh 'docker image tag djangoapp ${ecrendpoint}'
                         sh 'docker push ${ecrendpoint}'
                     }
                 }
+            }
         }
         stage('Remove local images after successful push') {
             steps {
                 sh 'docker rmi djangoapp'
-            }
-        }
-
+                }
+        }   
     }
-  }
+} 
 
 

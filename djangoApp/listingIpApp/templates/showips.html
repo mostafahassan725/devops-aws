@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show all IPs in the IPAddresses Table</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+	</style>
+</head>
+<body>
+
+<h2>IPAddresses Table</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>IP_Address</th>
+    <th>Date_visited</th>
+  </tr>
+
+  {% for ip in ips %}
+  <tr>
+    <td>{{ ip.id }}</td>
+    <td>{{ ip.ip_address }}</td>
+    <td>{{ ip.date_added }}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+</body>
+</html>
+
+
