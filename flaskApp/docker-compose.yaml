@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: flaskApp
+    networks: 
+      - flask
+    ports:
+      - 8001:8001
+    volumes:
+      - flask:/app
+networks:
+  django:
+    name: flask-net
+volumes:
+  django:
+    name: flask-data
+

@@ -23,7 +23,7 @@ EXPOSE 8000
 
 # Migrate the database models
 RUN python3 manage.py makemigrations --noinput
-RUN python3 manage.py migrate --noinput
+RUN python3 manage.py migrate --run-syncdb --noinput
 
 # Start the Django app when the container launches
 CMD ["nohup","python3","manage.py","runserver","0.0.0.0:8000"]
